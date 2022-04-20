@@ -328,11 +328,11 @@ public class Number1 {
      return this.num1+this.num2+num3;
     }
     
-    public void add(int num1, int num2){
+   /* public void add(int num1, int num2){
      this.num1=num1;
      this.num2=num2;
      System.out.println(this.num1+this.num2);
-    }
+    } */
    /* We will have comilation error for the above two methods as their parameter numbers and types are same but
     we have changed the return type. But we dont decide method overloading just with the return type of the methods */
     public float add(float f1, float f2){
