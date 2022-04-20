@@ -1,0 +1,307 @@
+ 
+  public class Customer {
+
+
+
+  }
+
+
+  public class Address {
+
+
+  }
+
+ public class Main {
+   public static void main(String args[]) {
+    Address address=new Address();
+    Customer customer=new Customer();
+    address.setHno();
+    address.setCity():
+    customer.setId();
+    customer.setFirstName();
+    customer.setAddress(address);
+    System.out.println("The details");
+    int id=customer.getId();
+    String firstName=customer.getFirstName();
+    address=customer.getAddress();
+    int hno=address.getHno();
+    System.out.println(hno);
+    String city=address.getCity();
+    System.out.println(city);
+   }
+}
+
+
+
+https://www.geeksforgeeks.org/unified-modeling-language-uml-class-diagrams/
+
+* Inheritance is for reusability of code.
+* extends keyword is used for inheritance.
+* private members of the Parent class are not inherited.
+* default/protected/public members are inherited.
+* With the object of child class we can access the public, protected and default member of the parent class.
+
+  public class Parent1{
+ 
+   public void displayParent(){
+   System.out.println("I am a method in the Parent class");
+   }
+ }
+
+ public class Child1 extends Parent1{
+   public void displayChild(){
+    System.out.println("I am a method in the Child class");
+   }
+}
+
+  public class InheritDemo1{
+    public static void main(String args[]){
+      Parent1 parent=new Parent1();
+      parent.displayParent();
+      //parent.displayChild();
+      Child1 child=new Child1();
+      child.displayParent();
+      child.displayChild();
+     }
+  }
+ 
+ // Parent class object cannot access child class member whereas child class object can access the parent class members( condition 
+is the members should not be private).
+
+------------------------------------------------------------------------------------------------------------------------------------
+Constructor call in inheritance.
+* We have two types of constructors
+  ** default or parameterless
+  ** parameterized constructor
+
+// parameterless constructor call
+  public class Parent2 {
+    private int num1;
+   
+    public int getNum1(){
+     return num1;
+    }
+ }
+
+  public class Child2 extends Parent2 {
+    private int num2;
+    
+    public int getNum2(){
+     return num2;      
+    }
+  }
+
+   public class ParentChildMain2{
+    public static void main(String args[]){
+       Child2 child=new Child2();
+       child.getNum1();   // 0
+       child.getNum2();   //0
+     }
+   }
+
+ // In the above example we have not defined any setter methods for num1 and num2 and we have also not mentioned any 
+ // constructor . So the default constructor is provided during the compilation and that initialised num1 and num2 with 0.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+
+ public class Parent3 {
+    private int num1;
+   
+     public Parent3(){
+       num1=20;
+       System.out.println("I am the parameterless constructor of parent");
+   }
+    public int getNum1(){
+     return num1;
+    }
+ }
+
+  public class Child3 extends Parent3 {
+    private int num2;
+
+    public Child3() {
+      // super();  // this is called implicitly and meant for invoking the parent class parameterless constructor
+       num2=200;
+       System.out.println("I am the parameterless constructor of the Child class");
+      }
+
+    public int getNum2(){
+     return num2;      
+    }
+  }
+
+ public class ParentChildMain3{
+    public static void main(String args[]){
+       Child3 child=new Child3();
+       System.out.println(child.getNum1());   // 20
+       System.out.println(child.getNum2());   // 200
+     }
+   }
+
+/* 
+I am the parameterless constructor of parent
+I am the parameterless constructor of the Child class
+20
+200
+*/
+
+By now, you have learnt that the derived classes inherit from the base class. You will now see how the child class object is created. As you all know, constructors are invoked while creating objects. When a child class object is created, the child class constructor invokes the parent class constructor before executing any statement present in the child constructor.
+------------------------------------------------------------------------------------------------------------------
+Parameterized constructor
+// super is used represent the immediate parent class. So in our example
+// Parent4 is the immediate parent class of Child4
+
+ public class Parent4 {
+    private int num1;
+   
+     public Parent4(int num1){
+       this.num1=num1;
+       System.out.println("I am the parameterized constructor of parent");
+   }
+    public int getNum1(){
+     return num1;
+    }
+ }
+
+  public class Child4 extends Parent4 {
+    private int num2;
+
+    public Child4(int num1,int num2) {
+       super(num1); // we have to explicitly invoke the parent class parameterized constructor  
+       this.num2=num2;
+       System.out.println("I am the parameterized constructor of the Child class");
+      }
+
+    public int getNum2(){
+     return num2;      
+    }
+  }
+
+ public class ParentChildMain4{
+    public static void main(String args[]){
+       Child4 child=new Child4(100,200);
+       System.out.println(child.getNum1());   // 100
+       System.out.println(child.getNum2());   // 200
+     }
+   }
+
+---------------------------------------
+From the parameterized constructor of the child class if we dont make a call to the
+parent class parameterized constructor, what will happen?
+
+
+
+public class Parent5{
+    private int num1;
+   
+     public Parent5(int num1){
+       this.num1=num1;
+       System.out.println("I am the parameterized constructor of parent");
+   }
+    public int getNum1(){
+     return num1;
+    }
+ }
+
+  public class Child5 extends Parent5 {
+    private int num2;
+
+    public Child5(int num1,int num2) {
+      // super(num1); // we have to explicitly invoke the parent class parameterized constructor  
+      // If we are not writing super(num1) explicitly , super() is carried out implicitly
+       this.num2=num2;
+       System.out.println("I am the parameterized constructor of the Child class");
+      }
+
+    public int getNum2(){
+     return num2;      
+    }
+  }
+
+ public class ParentChildMain5{
+    public static void main(String args[]){
+       Child5 child=new Child5(100,200);
+       System.out.println(child.getNum1());   // 100
+       System.out.println(child.getNum2());   // 200
+     }
+   }
+
+// The above code will show compilation error as the parameterized constructor is
+// trying to invoke the default constructor but we have not defined any default or
+// parameterless constructor in the parent class.
+
+Q So is the default constructor is not provided implicitly during compilation?
+A Yes if non of the constructor is defined in the class but in the above example
+we have one parameterized constructor in the parent class. That is the reason
+compiler wont provide any parameterless constructor . We have to explicitly write
+the parameterless constructor.
+
+
+
+public class Parent6{
+    private int num1;
+    
+     public Parent6(){
+      num1=2000;
+      System.out.println("I am the parameterless constructor of the Parent class");
+     }
+
+     public Parent6(int num1){
+       this.num1=num1;
+       System.out.println("I am the parameterized constructor of parent");
+   }
+    public int getNum1(){
+     return num1;
+    }
+ }
+
+  public class Child6 extends Parent6 {
+    private int num2;
+
+    public Child6(int num1,int num2) {
+      // super(num1); // we have to explicitly invoke the parent class parameterized constructor  
+      // If we are not writing super(num1) explicitly , super() is carried out implicitly
+       this.num2=num2;
+       System.out.println("I am the parameterized constructor of the Child class");
+      }
+
+    public int getNum2(){
+     return num2;      
+    }
+  }
+
+ public class ParentChildMain6{
+    public static void main(String args[]){
+       Child6 child=new Child6(100,200);
+       System.out.println(child.getNum1());   // 2000
+       System.out.println(child.getNum2());   // 200
+     }
+   }
+
+// So calling or invoking the Parent class constructor should be the first line
+// in the child class constructor otherwise it is a compilation error
+
+
+   public Child(int num1, int num2){
+   this.num2=num2;
+   super(num1);
+   }
+  // So the above snippet shows that we cannot invoke base class constructor at any
+other point of time. It has to be called in the first line of the Child class constructor.
+The above code is with error.
+
+---------------------------------
+public class Employee{}
+public class Educator{}
+
+What we cannot write....
+
+ public class Manager extends Employee,Educator{}
+// We dont have the concept of a java class extending multiple classes or inheriting 
+multiple classes.
+
+
+
+
+
