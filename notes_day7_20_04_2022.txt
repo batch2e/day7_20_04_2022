@@ -883,3 +883,439 @@ public class Main{
     manager.display();   Manager Employee Educator
   }
  }
+-------------------------------------------------------------------------------------------------------------------------------
+Object is at the topmost level in the class Hierarchy.
+
+  public class Project {}
+  public class Student {}
+  public class Employee{}
+
+  public class Project extends Object {}
+  public class Student extends Object {}
+  public class Employee extends Object {}
+ 
+// We need not require to write the class being extended from the Object class. It is by default.  
+
+// Q As we dont have the concept of multiple inheritance , in that class if a class is inheriting from other class , then how
+it will inherit the  Object class.
+
+  class Student {}
+
+  class CollegeStudent extends Student {}
+
+// Basically the Student is extending the Object class and CollegeStudent is extending Student. So CollegeStudent is inheriting
+ Object class through Student class
+
+     Object
+      |
+      |
+      |
+    Student
+      |
+      | 
+      |
+   CollegeStudent
+---------------------------------------------------------------------------------------------------------------------
+
+equals method ====> Equals method is 
+
+
+
+class Food {
+
+	private String foodName;
+	private String cuisine;
+	private String foodType;
+	private int quantityAvailable;
+	private double unitPrice;
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public String getCuisine() {
+		return cuisine;
+	}
+
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
+	}
+
+	public String getFoodType() {
+		return foodType;
+	}
+
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+}
+
+class Tester1 {
+
+	public static void main(String[] args) {
+		Food foodOne = new Food();
+		foodOne.setFoodName("Sandwich");
+		foodOne.setCuisine("Continental");
+		foodOne.setFoodType("Veg");
+		foodOne.setQuantityAvailable(100);
+		foodOne.setUnitPrice(10);
+
+		Food foodTwo = new Food();
+		foodTwo.setFoodName("Sandwich");
+		foodTwo.setCuisine("Continental");
+		foodTwo.setFoodType("Veg");
+		foodTwo.setQuantityAvailable(200);
+		foodTwo.setUnitPrice(10);
+
+		if (foodOne == foodTwo) {
+			System.out.println("The food objects are same!");
+		} else {
+			System.out.println("The food objects are different!");
+		}
+	}
+}
+// == is comparing whether both the reference variables , foodOne and foodTwo are refering to the same object or not. 
+// Here the objects are different. So it is returning false.
+
+The == operator which is used to compare two Food objects compares the objects with respect to their memory address.
+Thus, even though they have the same values of member variables, they are two different objects pointing to two different memory locations.
+-----------------------------------------------------------------------------------------------------------
+Whenever two objects are to be compared based on the values of the member variables, equals() method of Object class can be overridden.
+
+equals() compares objects to check for equality
+
+By default, equals() uses memory address to compare objects for equality (just like ==)
+
+
+
+public class Food2 {
+
+	private String foodName;
+	private String cuisine;
+	private String foodType;
+	private int quantityAvailable;
+	private double unitPrice;
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public String getCuisine() {
+		return cuisine;
+	}
+
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
+	}
+
+	public String getFoodType() {
+		return foodType;
+	}
+
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+}
+
+public class Tester2 {
+
+	public static void main(String[] args) {
+		Food2 foodOne = new Food2();
+		foodOne.setFoodName("Sandwich");
+		foodOne.setCuisine("Continental");
+		foodOne.setFoodType("Veg");
+		foodOne.setQuantityAvailable(100);
+		foodOne.setUnitPrice(10);
+
+		Food2 foodTwo = new Food2();
+		foodTwo.setFoodName("Sandwich");
+		foodTwo.setCuisine("Continental");
+		foodTwo.setFoodType("Veg");
+		foodTwo.setQuantityAvailable(200);
+		foodTwo.setUnitPrice(10);
+         
+		if (foodOne.equals(foodTwo)) {
+			System.out.println("The food objects are same!");
+		} else {
+			System.out.println("The food objects are different!");
+		}
+               System.out.println(foodOne.hashCode());
+               System.out.println(foodTwo.hashCode());
+	}
+}
+// In the above code though we expected that after using equals method we will get true as the contents of the Food items
+are same but still we are getting false. What is the reason?
+A The reason is , The equals method is inherited from the Object class. We are not writing any equals method in the above
+code. equals method of the Object class compares the address just like == . That is reason again we are getting false.
+
+Q What can we do so that equals method returns true if the contents are same?
+A Override the equals method in our class Food.
+
+Q What is hashCode() method is returning?
+A hashCode() method returns a number which represents the memory address of the newly created object. So for every
+newly created objects we will have different hashCode values returned by the hashCode method.
+
+Q Do we have any relationship between hashCode() method and equals() method?
+A Yes. If two objects after comparision returns true , then they should have the same hashCode value. But the default
+  hashCode method ( which is inherited from the Object class) returns different values though the objects are having the 
+  same content. If two objects are having same hashCode value we can assure that objects will be same.
+
+Q What we need to do so that equals and hashCode works in accordance to the specification in Java?
+A Override both hashCode() and equals() method in the class.
+
+public class Food3 {
+
+	private String foodName;
+	private String cuisine;
+	private String foodType;
+	private int quantityAvailable;
+	private double unitPrice;
+     
+	@Override
+	public int hashCode() {
+		return Objects.hash(cuisine, foodName, foodType, quantityAvailable, unitPrice);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Food3 other = (Food3) obj;
+		return Objects.equals(cuisine, other.cuisine) && Objects.equals(foodName, other.foodName)
+				&& Objects.equals(foodType, other.foodType) && quantityAvailable == other.quantityAvailable
+				&& Double.doubleToLongBits(unitPrice) == Double.doubleToLongBits(other.unitPrice);
+	}
+
+	public String getFoodName() {
+		return foodName;
+	}
+
+	public void setFoodName(String foodName) {
+		this.foodName = foodName;
+	}
+
+	public String getCuisine() {
+		return cuisine;
+	}
+
+	public void setCuisine(String cuisine) {
+		this.cuisine = cuisine;
+	}
+
+	public String getFoodType() {
+		return foodType;
+	}
+
+	public void setFoodType(String foodType) {
+		this.foodType = foodType;
+	}
+
+	public int getQuantityAvailable() {
+		return quantityAvailable;
+	}
+
+	public void setQuantityAvailable(int quantityAvailable) {
+		this.quantityAvailable = quantityAvailable;
+	}
+
+	public double getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(double unitPrice) {
+		this.unitPrice = unitPrice;
+	}
+}
+
+
+public class Tester3 {
+
+	public static void main(String[] args) {
+		Food3 foodOne = new Food3();
+		foodOne.setFoodName("Sandwich");
+		foodOne.setCuisine("Continental");
+		foodOne.setFoodType("Veg");
+		foodOne.setQuantityAvailable(100);
+		foodOne.setUnitPrice(10);
+
+		Food3 foodTwo = new Food3();
+		foodTwo.setFoodName("Sandwich");
+		foodTwo.setCuisine("Continental");
+		foodTwo.setFoodType("Veg");
+		foodTwo.setQuantityAvailable(100);
+		foodTwo.setUnitPrice(10);
+         
+		if (foodOne.equals(foodTwo)) {
+			System.out.println("The food objects are same!");
+		} else {
+			System.out.println("The food objects are different!");
+		}
+               System.out.println(foodOne.hashCode());
+               System.out.println(foodTwo.hashCode());
+	}
+}
+-------------------
+
+  public class StringDemo {
+    public static void main(String args[]) {
+     String str1=new String("hello");
+     String str2=new String("hello");
+     System.out.println(str1==str2);   // false
+     System.out.println(str1.equals(str2)); // true
+     System.out.println(str1.hashCode());
+     System.out.println(str2.hashCode());
+    }
+ }
+---------------------
+String toString()
+
+ 
+  public class Employee1 {
+    private int id;
+    private String name;
+    private String dept;
+    private int basic;
+    //setters/getters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public int getBasic() {
+		return basic;
+	}
+	public void setBasic(int basic) {
+		this.basic = basic;
+	}
+
+
+  }
+
+  
+
+  public class EmployeeMain1 {
+   public static void main(String args[]){
+    Employee1 emp=new Employee1();
+    emp.setId(1);
+    emp.setName("Ritesh");
+    emp.setDept("Sales");
+    emp.setBasic(45000);
+    System.out.println(emp.getId());
+    System.out.println(emp);               //Employee1@1c4af82c  // classname@hashCode value in hexadecimal
+    System.out.println(emp.toString());   //Employee1@1c4af82c
+   }
+ }
+ 
+ // The above data is not very much readable .. So to make it readable we can override the toString method from the Object class.  
+
+
+
+
+ public class Employee2 {
+    private int id;
+    private String name;
+    private String dept;
+    private int basic;
+    //setters/getters
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getDept() {
+		return dept;
+	}
+	public void setDept(String dept) {
+		this.dept = dept;
+	}
+	public int getBasic() {
+		return basic;
+	}
+	public void setBasic(int basic) {
+		this.basic = basic;
+	}
+	@Override
+	public String toString() {
+		return "ID"+id+"\n NAME "+name+"\n DEPT "+dept+"\n BASIC"+basic;
+	}
+
+
+  }
+
+  
+public class EmployeeMain2 {
+   public static void main(String args[]){
+    Employee2 emp=new Employee2();
+    emp.setId(1);
+    emp.setName("Ritesh");
+    emp.setDept("Sales");
+    emp.setBasic(45000);
+    System.out.println(emp.getId());
+    //System.out.println(emp);
+    System.out.println(emp.toString());
+   }
+ }
