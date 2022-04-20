@@ -488,3 +488,301 @@ For method overriding :-
            
          }
     }
+
+-------------------------------------------------------------------------
+
+public class Address {
+private String hno;
+private String city;
+private String locality;
+private int code;
+
+
+// Right click on the editor====> Source======> generate constructor with fields
+
+public Address(String hno, String city, String locality, int code) {
+	super();
+	this.hno = hno;
+	this.city = city;
+	this.locality = locality;
+	this.code = code;
+}
+
+
+
+public String getHno() {
+	return hno;
+}
+public void setHno(String hno) {
+	this.hno = hno;
+}
+public String getCity() {
+	return city;
+}
+public void setCity(String city) {
+	this.city = city;
+}
+public String getLocality() {
+	return locality;
+}
+public void setLocality(String locality) {
+	this.locality = locality;
+}
+public int getCode() {
+	return code;
+}
+public void setCode(int code) {
+	this.code = code;
+}
+
+
+}
+
+
+
+
+
+public class Customer {
+	private String customerId;
+	private String customerName;
+	private long contactNumber;
+	private Address address;
+	public Customer(String customerId, String customerName, long contactNumber,
+			Address address) {
+		this.customerId = customerId;
+		this.customerName = customerName;
+		this.contactNumber = contactNumber;
+		this.address = address;
+	}
+	public double payBill(double totalPrice) {
+		System.out.println("Final bill for the customer is calculated here");
+		return totalPrice;
+	}
+	// displayCustomerDetails()
+	// updateDetails() overloaded methods
+	// getter and setter methods
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public long getContactNumber() {
+		return contactNumber;
+	}
+	public void setContactNumber(long contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+	public Address getAddress() {
+		return address;
+	}
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+	
+}
+
+
+
+public class RegularCustomer extends Customer {
+	private float discountPercentage;
+	public RegularCustomer(String custId, String custName, long mobileNo,
+			Address address) {
+		super(custId, custName, mobileNo, address);
+		this.discountPercentage = 5.0f;
+	}
+	@Override
+	public double payBill(double totalPrice) {
+		double priceAfterDiscount = totalPrice
+				* (1 - (discountPercentage / 100));
+		return priceAfterDiscount;
+	}
+	// getter and setter methods
+}
+
+
+public class Tester {
+	public static void main(String[] args) {
+	/*	// Customer object created
+              /*  Address address=new Address("D089", "St. Louis Street", "Springfield", 62729);
+		Customer customer = new Customer("C101", "Stephen Abram", 7856341287L,address); */
+              Customer customer = new Customer("C101", "Stephen Abram", 7856341287L,
+				new Address("D089", "St. Louis Street", "Springfield", 62729));
+		// payBill() is invoked
+		double amount = customer.payBill(40.0);
+		System.out.println("Final bill amount is $" + (int) (amount * 100)/ 100.0);
+              //Regular Customer object created
+                 RegularCustomer regularCustomer = new RegularCustomer("C101",
+		  "Stephen Abram", 7856341287L, new Address("D089",
+				"St. Louis Street", "Springfield", 62729));
+            // payBill() is invoked
+              amount = regularCustomer.payBill(40.0);
+           System.out.println("Final bill amount is $" + (int) (amount * 100)/ 100.0);*/
+            Customer regularCustomer = new RegularCustomer("C101", "Stephen Abram", 7856341287L, new Address("D089", "St. Louis            Street", "Springfield", 62729));
+            double amount = regularCustomer.payBill(40.0);
+           System.out.println(amount);
+	}
+}
+
+// We are able to see that reference variable is of Parent type Customer and object is of the Child class RegularCustomer
+
+    Customer customer=new RegularCustomer();
+// The above line is an example of conversion/upcasting where we are converting the child class object into Parent class.
+// So we are learning that the reference of Parent class can store the address if newly created child object.
+   double=customer.payBill(40.0);
+ // In the above line payBill of the Child class is called. So we have remember that here it is being due to the dynamic
+// polymorphism which means that method is called whose reference we are storing in the reference variable
+// In the above case though the reference variable is of Parent type but object of Child type.
+// That is the reason when the methods are called we have the overriding and overridden methods, overriding method will be called(The method which is in the child class)   
+
+    Customer customer=new Customer();
+    RegularCustomer rc=new RegularCustomer():
+
+---------------------------------------------------------------------------------------------------------------------
+public class Parent10 {
+
+    public void display(){
+     System.out.println("Parent");
+    
+   }
+  public void displayParent() {
+    System.out.println("I am the display parent method");
+ }
+}
+
+public class Child10 extends Parent10 {
+    public void display(){
+     System.out.println("Child");
+    }
+    public void displayChild(){
+     System.out.println("I am the display child method");
+ }
+}
+public class ParentChildMain10{
+   public static void main(String args[]){
+     Parent10 parent=new Parent10();
+     parent.display();    // Parent
+    Child10 child=new Child10();
+    child.display();  // Child
+    Parent10 parent1=new Child10();
+    parent1.display(); // Child
+    // It checks for display method in the Parent class , if it is found, it is checked in the Derived class because
+   // object is of the Derived class. If it is found in the Derived class , that version of the method is called.
+    parent1.displayChild(); // This line will show compilation error as this method is not present in the Parent class
+// It checks whether the displayChild is present in the parent class or not as the reference variable is of Parent type
+// as the method is not found in the Parent class , the code gives compilation error   
+
+ parent1.displayParent(); // I am the display parent method
+// In the above case first it is checked in the Parent class and when it is found in the parent class, it is checked
+// in the subclass but in the subclass we dont have any method called displayParent so the displayParent of the Parent class is
+// called
+   }
+}
+-----------------------------------------------------------------------------------------------------------------------
+public class Parent11 {
+
+    public static void display(){
+     System.out.println("Parent");
+    
+   }
+ }
+
+public class Child11 extends Parent11 {
+    public static void display(){
+     System.out.println("Child");
+    }
+  
+ }
+
+public class ParentChildMain11{
+   public static void main(String args[]){
+       Parent11 parent=new Child11();
+        parent.display(); // Parent The reason is static methods are not related with object and that is the reason
+      // There is no concept of method overriding as the static methods are related to the class. Here it will check the
+      // Type of the reference variable. Because reference are created during the compilation time
+   }
+}
+
+---------------------------------------------------------------
+
+
+public class DynamicBindingTester {
+	public static void main(String[] args) {
+		Employee employee = new Employee();
+		Manager manager = new Manager();
+		Employee eduEmployee = new Educator();
+		Educator managerEdu = new Manager();
+		
+		displayEmployeeDetails(employee);
+		displayEmployeeDetails(manager);
+		displayEmployeeDetails(eduEmployee);
+		displayEmployeeDetails(managerEdu);
+	}
+	
+	// Employee reference can accept its object and any of the child object 
+	public static void displayEmployeeDetails(Employee employee) {
+		employee.displayDetails();	// displayDetails invoked will be based on the object received
+	}
+}
+
+public class Employee {
+	String name = "James Anthony";
+	
+	public void displayDetails(){
+		System.out.println(name+" is an employee");
+	}	
+}
+public class Educator extends Employee {
+	public void displayDetails(){
+		System.out.println(name+" is an educator");
+	}
+}
+public class Manager extends Educator {
+	public void displayDetails(){
+		System.out.println(name+" is a manager");
+	}
+}
+------------------------------------------------------------------
+
+public class DynamicBindingTester1 {
+	public static void main(String[] args) {
+		Employee1 employee = new Employee1();
+		Manager1 manager = new Manager1();
+		Employee1 eduEmployee = new Educator1();
+		Educator1 managerEdu = new Manager1();
+		
+		displayEmployeeDetails(employee);   // This wont work
+		displayEmployeeDetails(manager);     // This will work
+		displayEmployeeDetails(eduEmployee);    // This wont work
+		displayEmployeeDetails(managerEdu);     // This will work
+	}
+	
+	// Employee reference can accept its object and any of the child object 
+	public static void displayEmployeeDetails(Educator employee) {
+		employee.displayDetails();	// displayDetails invoked will be based on the object received
+	}
+}
+
+public class Employee1 {
+	String name = "James Anthony";
+	
+	public void displayDetails(){
+		System.out.println(name+" is an employee");
+	}	
+}
+public class Educator1 extends Employee1 {
+	public void displayDetails(){
+		System.out.println(name+" is an educator");
+	}
+}
+public class Manager1 extends Educator1 {
+	public void displayDetails(){
+		System.out.println(name+" is a manager");
+	}
+}
