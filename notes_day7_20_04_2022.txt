@@ -365,6 +365,126 @@ public class Number1 {
  }
 
 // As the method call is checked during the compilation time, method overloading is called as compile time polymorphism.
+--------------------------------------------------------------------------------------------------------------------------------------
+Method overriding
+
+       public class Parent7 {
+  
+         public void dispParent(){
+             System.out.println("I am the parent class disp Parent method");
+         }
+
+       public void display(){     // overridden
+               System.out.println("I am the display method of the Parent class");
+       }
+   }
+
+   public class Child7 extends Parent7 {
+       public void dispChild(){
+            System.out.println("I am the Child class disp Child method");
+       }
+       public void display(){      // overriding
+             System.out.println("I am the display method of the Child class");
+       }
+    }
+// In the below class display method is present but the Child7b is not having any parent child relationship with the classes
+// mentioned in the example. So we cannot decide that display in the below class is a overridden or overriding method.
+// But in Parent7 we have a display method which is the method overridden and the Child7 is having the display method
+// If we have two methods with 
+   * method name same
+   * return type same
+   * number of parameters same
+   * data type of parameters same
+   * The classes are having parent child relationship
+Then we say that the method in the derived class is overriding the method in the base/parent class. So the derived class method
+is overriding and base class method is overridden.
+
+// which is overriding method
+
+   public class Child7b {
+     public void display(){
+             System.out.println("I am the display method of the Child7b class");
+       }
+
+   }
+
+   public class ParentChildMain7{
+          public static void main(String args[]){
+              Child7 child=new Child7();
+              child.dispParent();
+              child.dispChild();
+              child.display();
+              Parent7 parent=new Parent7();
+              parent.dispParent();
+              parent.display();
+         }
+    }
+Observations:-
+   * displayParent() is specific to the Parent class and displayChild() is specific to Child class.
+   * display() method is present both in Parent class and the Child class.
+
+              
+Output:
+I am the parent class disp Parent method
+I am the Child class disp Child method
+I am the display method of the Child class  // This is because of method overriding.
+I am the parent class disp Parent method
+I am the display method of the Parent class
 
 
+For method overriding :-
+* We should have two classes related with Parent Child relationship.
+-----------------------------------------------------------------------------------------
+ private=====>default====>protected=====>public
+// Private is the most restrictive access and public is the least restrictive access
+// In the Parent class the access specifier is with less restriction whereas in Child class it is with the most restrictive one.
 
+// Cannot reduce the visibility of the inherited method from Parent8
+
+       public class Parent8 {
+  
+      
+
+       public void display(){     // overridden
+               System.out.println("I am the display method of the Parent class");
+       }
+   }
+
+   public class Child8 extends Parent8 {
+      
+       private void display(){      // overriding
+             System.out.println("I am the display method of the Child class");
+       }
+    }
+
+ public class ParentChildMain8{
+          public static void main(String args[]){
+              Child8 child=new Child8();
+           
+         }
+    }
+-------------------------------------------------------------------------
+
+
+   public class Parent9 {
+  
+      
+
+      void display(){     // overridden
+               System.out.println("I am the display method of the Parent class");
+       }
+   }
+
+   public class Child9 extends Parent9 {
+      
+       public void display(){      // overriding
+             System.out.println("I am the display method of the Child class");
+       }
+    }
+
+ public class ParentChildMain9{
+          public static void main(String args[]){
+              Child9 child=new Child9();
+           
+         }
+    }
