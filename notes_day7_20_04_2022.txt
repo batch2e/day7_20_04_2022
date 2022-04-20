@@ -786,3 +786,100 @@ public class Manager1 extends Educator1 {
 		System.out.println(name+" is a manager");
 	}
 }
+------------------------------------------------------------------------------------------------------------------------------
+usage of super
+
+public class Parent12 {
+
+    public void display(){
+     System.out.println("Parent");
+    
+   }
+ }
+// super.display() can be invoked anywhere within the display method, it is not required that it should be the first
+// line to be called in the method. When we are using it in constructor calling, that should be the first line in another class
+// constructor
+public class Child12 extends Parent12 {
+    public  void display(){
+     super.display();
+     System.out.println("Child");
+    }
+  
+ }
+
+public class ParentChildMain12{
+   public static void main(String args[]){
+    Child12 child=new Child12();    
+    child.display();   // Parent Child
+   }
+}
+--------------------------------------------------------------------------------------------------------------------
+
+
+
+public class Parent13 {
+   protected int num;
+    public Parent13(){
+      num=10;
+    }
+    public void display(){
+     System.out.println("Parent"+num);
+    
+   }
+ }
+
+public class Child13 extends Parent13 {
+    private int num;
+     public Child13(){
+        num=20;
+     }
+    public  void display(){
+          System.out.println(super.num);
+          System.out.println(num);
+    }
+  
+ }
+
+public class ParentChildMain13{
+   public static void main(String args[]){
+    Child13 child=new Child13();    
+    child.display();   
+   }
+}
+
+
+----------------------------------------
+
+public class Employee{
+
+ public void display(){
+  System.out.println("Employee");
+ }
+
+}
+
+public class Educator extends Employee{
+ public void display(){
+   super.display(); // This will invoke the Employee class display method
+   System.out.println("Educator");
+ }
+
+}
+
+
+public class Manager extends Educator {
+ public void display(){
+  super.super.display(); // This will show compilation error
+  System.out.println("Manager");
+  super.display();  // immediate parent class display will be called which is an Educator 
+  
+ }
+
+}
+
+public class Main{
+   public static void main(String args[]) {
+    Manager manager=new Manager();
+    manager.display();   Manager Employee Educator
+  }
+ }
