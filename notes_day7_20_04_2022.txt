@@ -1319,3 +1319,151 @@ public class EmployeeMain2 {
     System.out.println(emp.toString());
    }
  }
+--------------------------------------------------------------------------------------------------------------------------------
+8 primitive types       Classes mapped with 8 primitive types
+char                    Character
+byte                    Byte
+short                   Short
+int                     Integer
+long                    Long
+float                   Float
+double                  Double
+boolean                 Boolean
+
+The classes are Wrapper classes. They are called as Wrapper classes because they are wrapping the primitive type and
+converting them into objects. Primitive types are not objects but in Java , in many places we require object rather than primitive
+types. In those cases we have to convert the primitive type to Object with the help Wrapper classes. So we have 8 Wrapper classes.
+
+String is not a Wrapper class.
+-------------------------------------------------------------------------------------------------------------------------
+final is a keyword used with 
+* class
+* variables
+* method
+
+If a class is final it cannot be inherited or it cannot be subclassed.
+
+ public final class FinalClass{
+
+
+} 
+
+public class DerivedClass extends FinalClass{}
+
+
+// The type DerivedClass cannot subclass the final class FinalClass
+--------------------------------------------------------------------------------------------------------------------------
+If a variable is final it cannot be re-initialised. 
+* We have two techniques to initialise final variables.
+  ** at the place of declaration
+  ** within the constructor
+
+public class Demo {
+   private final int num=10;
+   
+   public void display(){
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain{
+   public static void main(String args[]) {
+    Demo demo=new Demo();
+    demo.display();
+   }
+ }
+ 
+-----
+// Within constructor 
+public class Demo1 {
+ 
+  private final int num;
+
+   public Demo1(){
+    num=20;
+   }
+   
+   public void display(){
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain1{
+   public static void main(String args[]) {
+    Demo1 demo=new Demo1();
+    demo.display();
+   }
+ }
+
+------------------------------------------------
+// We cannot write as below
+// final variables need to be initialised either at the place of declaration
+// or with the constructor
+public class Demo2 {
+ 
+  private final int num;
+// The blank final field num may not have been initialized
+   
+   public void display(){
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain2{
+   public static void main(String args[]) {
+    Demo2 demo=new Demo2();
+    demo.display();
+   }
+ }
+----------------------------------
+// We cannot reinitialise the final variables. The below code gives compilation error
+
+public class Demo3 {
+ 
+  private final int num;
+
+   public Demo3(){
+    num=20;
+   }
+   
+   public void display(){
+    num=45;  // The final field Demo3.num cannot be assigned
+    System.out.println(num);
+   }
+ }
+
+public class DemoMain3{
+   public static void main(String args[]) {
+    Demo3 demo=new Demo3();
+    demo.display();
+   }
+ }
+
+--------------------------------------
+
+// final method cannot be overridden
+
+public class Demo4 {
+   public final void display(){
+   System.out.println("Hello");
+  }
+}
+
+public class DemoDerive4 extends Demo4 {
+   public void display(){   // Cannot override the final method from  Demo4
+   System.out.println("Hello");
+  }
+ }
+------------------------------------------------------------------
+// A local variable can be declared as final
+public class FinalDemo {
+   public static void main(String args[]) {
+    final int i=10;
+    System.out.println(i);
+    //i=20;
+   }
+ }
+--------------------------------------------------------------------------------------------------------------------
+String class is a final class.
+Wrapper classes are final. 
+ 
